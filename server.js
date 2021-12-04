@@ -6,9 +6,10 @@ const tourRoutes = require("./src/routes/tour.route");
 const app = express();
 app.use(bodyParser.json());
 
-require("dotenv").config({
-  path: "./src/config/index.env",
-});
+// require("dotenv").config({
+//   path: "./src/config/index.env",
+// });
+require("dotenv").config();
 
 // Connect DB
 const connectDB = require("./src/config/db");
