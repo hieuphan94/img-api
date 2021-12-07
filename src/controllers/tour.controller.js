@@ -1,9 +1,22 @@
-const mongoose = require("mongoose");
 const Tour = require("../model/Tour");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 const getTours = async (req, res) => {
-  res.json("TOURS");
+  let order = req.query.order ? req.query.order : "asc";
+  let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+  try {
+    let tours = await Tour.find({})
+      // .select("-photo")
+      // .populate("category")
+      .sort([[sortBy, order]])
+      .limit(limit)
+      .exec();
+    res.json(tours);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Invalid querys");
+  }
 };
 
 // GET TOUR

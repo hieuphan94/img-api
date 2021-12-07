@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
-const TourSchema = new mongoose.Schema(
+const PageSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -9,24 +9,20 @@ const TourSchema = new mongoose.Schema(
       trim: true,
     },
     slug: { type: String, lowercase: true, unique: true },
-    price: {
-      type: Number,
-      required: true,
+    desc: {
+      type: String,
+      default: "",
     },
     img: {
       type: String,
       default: "/img/banner-page.jpeg",
-    },
-    category: {
-      type: String,
-      default: "Uncategorized",
     },
   },
   { timestamps: true }
 );
 
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()
-TourSchema.pre("save", function (next) {
+PageSchema.pre("save", function (next) {
   const slugName = slugify(this.title, {
     lower: true,
     locale: "vi",
@@ -36,4 +32,4 @@ TourSchema.pre("save", function (next) {
   next();
 });
 
-module.exports = mongoose.model("Tour", TourSchema);
+module.exports = mongoose.model("Page", PageSchema);

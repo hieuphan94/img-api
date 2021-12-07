@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const tourRoutes = require("./src/routes/tour.route");
+const pageRoutes = require("./src/routes/page.route");
 
 const app = express();
 app.use(bodyParser.json());
@@ -23,7 +24,9 @@ app.get("/", (req, res) => {
   res.send("test route => home page");
 });
 
+app.use("/api/user/", require("./src/routes/auth.route"));
 app.use("/api/tour", tourRoutes);
+app.use("/api/page", pageRoutes);
 
 app.use((req, res) => {
   res.status(404).json({
