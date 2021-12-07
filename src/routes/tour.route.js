@@ -17,7 +17,7 @@ router.get("/list", getTours);
 
 router.get("/:tourId", getTour);
 
-router.put("/:tourId", updateTour);
+router.put("/:tourId", auth, adminAuth, updateTour);
 
 router.delete("/:tourId", auth, adminAuth, deleteTour);
 

@@ -1,8 +1,21 @@
 const Page = require("../model/Page");
 const ObjectId = require("mongoose").Types.ObjectId;
 
+// GET ALL PAGE
 const getPages = async (req, res) => {
-  res.json("PAGES");
+  let order = req.query.order ? req.query.order : "asc";
+  let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+  try {
+    let pages = await Page.find({})
+      .sort([[sortBy, order]])
+      .limit(limit)
+      .exec();
+    res.json(pages);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Invalid querys");
+  }
 };
 
 // GET Page
