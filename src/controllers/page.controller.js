@@ -9,7 +9,7 @@ const getPages = async (req, res) => {
   try {
     let pages = await Page.find({})
       .sort([[sortBy, order]])
-      .limit(limit)
+      // .limit(limit)
       .exec();
     res.json(pages);
   } catch (error) {
