@@ -13,6 +13,10 @@ const PageSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    category: {
+      type: String,
+      default: "uncategorized",
+    },
     img: {
       type: String,
       default: "/img/banner-page.jpeg",
