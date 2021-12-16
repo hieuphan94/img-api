@@ -12,7 +12,25 @@ const TourSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: true,
+      default: 0,
     },
+    summary: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    timeline: [
+      {
+        title: {
+          type: String,
+          required: [true, "A timeline must have day's title"],
+        },
+        description: {
+          type: String,
+          required: [true, "A timeline must have day's description"],
+        },
+      },
+    ],
     img: {
       type: String,
       default: "/img/banner-page.jpeg",

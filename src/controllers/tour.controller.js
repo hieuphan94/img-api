@@ -3,15 +3,13 @@ const ObjectId = require("mongoose").Types.ObjectId;
 
 // GET ALL TOUR
 const getTours = async (req, res) => {
-  let order = req.query.order ? req.query.order : "asc";
+  let order = req.query.order ? req.query.order : "desc";
   let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
-  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+  // let limit = req.query.limit ? parseInt(req.query.limit) : 6;
   try {
     let tours = await Tour.find({})
-      // .select("-photo")
-      // .populate("category")
       .sort([[sortBy, order]])
-      .limit(limit)
+      // .limit(limit)
       .exec();
     res.json(tours);
   } catch (error) {
@@ -36,12 +34,7 @@ const getTour = async (req, res) => {
 
 // CREATE TOUR
 const createTour = async (req, res) => {
-  const { title, price } = req.body;
-  const tour = {
-    title: title,
-    price: price,
-  };
-  const newTour = Tour(tour);
+  const newTour = Tour(req.body);
   try {
     const savedTour = await newTour.save();
     res.status(200).json(savedTour);
