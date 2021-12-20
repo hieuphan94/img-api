@@ -23,11 +23,9 @@ const TourSchema = new mongoose.Schema(
       {
         title: {
           type: String,
-          required: [true, "A timeline must have day's title"],
         },
         description: {
           type: String,
-          required: [true, "A timeline must have day's description"],
         },
       },
     ],
